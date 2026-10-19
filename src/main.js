@@ -55,3 +55,52 @@ if (gallery) {
   showSlide(0);
 }
 
+
+
+// Automatische Video-Vorschaubilder: einen Frame direkt im Browser auslesen.
+document.querySelectorAll(".video-frame video").forEach((video) => {
+  const frame = video.closest(".video-frame");
+  if (!frame) return;
+
+  const createPoster = () => {
+    if (video.dataset.posterCreated === "true" || !video.videoWidth || !video.videoHeight) return;
+    try {
+      const canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+      video.poster = canvas.toDataURL("image/jpeg", 0.82);
+      video.dataset.posterCreated = "true";
+      video.classList.add("has-auto-poster");
+      video.removeEventListener("seeked", createPoster);
+      video.removeEventListener("loadeddata", onLoadedData);
+    } catch (error) {
+      // Externe Videodateien ohne passende CORS-Freigabe lassen sich nicht
+      // auf ein Canvas zeichnen. Die normale Videowiedergabe bleibt nutzbar.
+      frame.classList.add("poster-unavailable");
+      console.warn("Video-Vorschaubild konnte nicht erzeugt werden (möglicherweise CORS):", error);
+    }
+  };
+
+  const onLoadedData = () => {
+    if (video.dataset.posterCreated === "true") return;
+    const duration = Number.isFinite(video.duration) ? video.duration : 0;
+    const targetTime = duration > 2 ? Math.min(1.5, duration * 0.1) : 0;
+    if (Math.abs(video.currentTime - targetTime) < 0.1) {
+      createPoster();
+      return;
+    }
+    video.addEventListener("seeked", createPoster, { once: true });
+    try {
+      video.currentTime = targetTime;
+    } catch {
+      createPoster();
+    }
+  };
+
+  // CORS muss vor dem Neuladen gesetzt sein, damit Canvas-Zugriff erlaubt ist.
+  video.crossOrigin = "anonymous";
+  video.addEventListener("loadeddata", onLoadedData);
+  video.addEventListener("error", () => frame.classList.add("poster-unavailable"), { once: true });
+  video.load();
+});
