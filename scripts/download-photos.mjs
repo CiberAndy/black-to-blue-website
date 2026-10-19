@@ -3,7 +3,7 @@ import path from "node:path";
 
 const sourceUrl = "https://www.black2blue-band.de/aktuelles";
 const assetsDir = path.resolve("public", "assets");
-const expectedPhotoCount = 14;
+const expectedPhotoCount = 15;
 
 function decodeHtml(value) {
   return value
@@ -11,13 +11,13 @@ function decodeHtml(value) {
     .replace(/&#0*38;/g, "&")
     .replace(/\\u0026/gi, "&")
     .replace(/\\\//g, "/")
-    .replace(/&quot;/g, '"')
+    .replace(/&quot;/g, '\"')
     .replace(/&#0*39;/g, "'");
 }
 
 function getGalleryPhotos(html) {
   const normalizedHtml = decodeHtml(html);
-  const urlPattern = /https?:\/\/le-cdn\.website-editor\.net\/[^"'<>\\\s]+?\.(?:jpe?g|png|webp)(?:\?[^"'<>\\\s]*)?/gi;
+  const urlPattern = /https?:\/\/le-cdn\.website-editor\.net\/[^\"'<>\\\s]+?\.(?:jpe?g|png|webp)(?:\?[^\"'<>\\\s]*)?/gi;
   const candidates = [...normalizedHtml.matchAll(urlPattern)].map((match) => match[0]);
   const bestByImage = new Map();
 
