@@ -10,6 +10,7 @@ export default defineConfig({
         main: fromRoot('./index.html'),
         videos: fromRoot('./videos.html'),
         impressum: fromRoot('./impressum.html'),
+        datenschutz: fromRoot('./datenschutz.html'),
       },
     },
   },
