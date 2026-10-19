@@ -31,7 +31,7 @@ Die erste Fassung wurde anhand der öffentlich sichtbaren Inhalte der bestehende
 ## Vor Veröffentlichung prüfen
 
 - Konzerttermine, Uhrzeiten und Veranstaltungsdetails mit der Band abgleichen.
-- Eine Galerie mit sechs Originalfotos ist eingebunden. Die Bilder werden lokal unter `public/assets/` abgelegt. Zum Herunterladen der Originale das Skript `node scripts/download-photos.mjs` ausführen; dafür müssen die signierten Original-Links noch gültig sein.
+- Die Originalgalerie enthält 14 Fotos. `node scripts/download-photos.mjs` liest die aktuellen Bild-URLs direkt aus `https://www.black2blue-band.de/aktuelles` aus und lädt alle 14 Bilder nach `public/assets/`. So werden keine fest eingetragenen, zeitlich begrenzten Bildlinks benötigt.
 - Ein eigenes Logo bzw. lokale Bilddateien können später ergänzt werden.
 - Impressum und Datenschutzerklärung ergänzen bzw. juristisch prüfen.
 - Cookie-/Datenschutzanforderungen für eingebettete Medien prüfen. SoundCloud wird derzeit nur extern verlinkt.
