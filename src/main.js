@@ -57,35 +57,74 @@ if (gallery) {
 
 
 
-// Automatische Video-Vorschaubilder: einen Frame direkt im Browser auslesen.
+// Stabiles Video-Standbild: Ein eigenes Bild-Overlay verhindert, dass der
+// Browser das Vorschaubild beim Laden/Entladen des Videoframes schwarz übermalt.
 document.querySelectorAll(".video-frame video").forEach((video) => {
   const frame = video.closest(".video-frame");
   if (!frame) return;
 
+  let posterImage = null;
+  let posterReady = false;
+
+  const hidePoster = () => {
+    if (posterImage) posterImage.hidden = true;
+  };
+
   const createPoster = () => {
-    if (video.dataset.posterCreated === "true" || !video.videoWidth || !video.videoHeight) return;
+    if (posterReady || !video.videoWidth || !video.videoHeight) return;
     try {
       const canvas = document.createElement("canvas");
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-      canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
-      video.poster = canvas.toDataURL("image/jpeg", 0.82);
+      const context = canvas.getContext("2d");
+      if (!context) return;
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const posterUrl = canvas.toDataURL("image/jpeg", 0.86);
+
+      posterImage = document.createElement("img");
+      posterImage.className = "video-poster";
+      posterImage.alt = "Vorschaubild – zum Abspielen klicken";
+      posterImage.src = posterUrl;
+      posterImage.tabIndex = 0;
+      posterImage.setAttribute("role", "button");
+      posterImage.setAttribute("aria-label", "Video abspielen");
+      posterImage.addEventListener("click", async () => {
+        hidePoster();
+        try {
+          await video.play();
+        } catch (error) {
+          posterImage.hidden = false;
+          console.warn("Video konnte nicht gestartet werden:", error);
+        }
+      });
+      posterImage.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          posterImage.click();
+        }
+      });
+      frame.appendChild(posterImage);
+      video.poster = posterUrl;
+      posterReady = true;
       video.dataset.posterCreated = "true";
-      video.classList.add("has-auto-poster");
-      video.removeEventListener("seeked", createPoster);
-      video.removeEventListener("loadeddata", onLoadedData);
-      // Den Clip wieder an den Anfang setzen, damit Play bei 0 startet.
-      if (video.currentTime > 0.05) video.currentTime = 0;
+
+      // Nach dem Erstellen an den Anfang zurückspringen; das Overlay bleibt
+      // sichtbar, auch wenn der Videoplayer beim Seek kurz einen schwarzen Frame zeigt.
+      if (video.currentTime > 0.05) {
+        const resetToStart = () => {
+          video.removeEventListener("seeked", resetToStart);
+        };
+        video.addEventListener("seeked", resetToStart, { once: true });
+        video.currentTime = 0;
+      }
     } catch (error) {
-      // Externe Videodateien ohne passende CORS-Freigabe lassen sich nicht
-      // auf ein Canvas zeichnen. Die normale Videowiedergabe bleibt nutzbar.
       frame.classList.add("poster-unavailable");
       console.warn("Video-Vorschaubild konnte nicht erzeugt werden (möglicherweise CORS):", error);
     }
   };
 
   const onLoadedData = () => {
-    if (video.dataset.posterCreated === "true") return;
+    if (posterReady) return;
     const duration = Number.isFinite(video.duration) ? video.duration : 0;
     const targetTime = duration > 2 ? Math.min(1.5, duration * 0.1) : 0;
     if (Math.abs(video.currentTime - targetTime) < 0.1) {
@@ -100,9 +139,11 @@ document.querySelectorAll(".video-frame video").forEach((video) => {
     }
   };
 
-  // CORS muss vor dem Neuladen gesetzt sein, damit Canvas-Zugriff erlaubt ist.
+  // Erst CORS setzen, dann die Quelle einmal neu laden, damit Canvas-Zugriff
+  // erlaubt ist. Das Overlay bleibt unabhängig vom Zustand des Videoframes.
   video.crossOrigin = "anonymous";
   video.addEventListener("loadeddata", onLoadedData);
+  video.addEventListener("play", hidePoster);
   video.addEventListener("error", () => frame.classList.add("poster-unavailable"), { once: true });
   video.load();
 });
