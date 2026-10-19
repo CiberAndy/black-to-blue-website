@@ -55,36 +55,3 @@ if (gallery) {
   showSlide(0);
 }
 
-
-// Erzeuge Vorschaubilder aus echten Videoframes (ohne die Videos abzuspielen).
-document.querySelectorAll(".video-frame video").forEach((video) => {
-  const makePoster = () => {
-    if (video.dataset.posterCaptured === "true" || !video.videoWidth || !video.videoHeight) return;
-    const originalTime = video.currentTime;
-    const targetTime = Math.min(2.5, Math.max(0.5, (video.duration || 5) * 0.12));
-    const onSeeked = () => {
-      try {
-        const canvas = document.createElement("canvas");
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
-        video.poster = canvas.toDataURL("image/jpeg", 0.84);
-        video.dataset.posterCaptured = "true";
-      } catch (error) {
-        // Wenn der Video-Host das Auslesen aus Sicherheitsgründen verhindert,
-        // bleibt der normale Video-Player weiterhin nutzbar.
-      } finally {
-        video.removeEventListener("seeked", onSeeked);
-        if (Number.isFinite(originalTime)) {
-          try { video.currentTime = originalTime; } catch (_) {}
-        }
-      }
-    };
-    video.addEventListener("seeked", onSeeked, { once: true });
-    try { video.currentTime = targetTime; } catch (_) {
-      video.removeEventListener("seeked", onSeeked);
-    }
-  };
-  video.addEventListener("loadedmetadata", makePoster, { once: true });
-  if (video.readyState >= 1) makePoster();
-});
