@@ -34,7 +34,7 @@ function getGalleryPhotos(html) {
     const filename = path.posix.basename(url.pathname);
     const widthMatch = filename.match(/-(\d+)w(?=\.[^.]+$)/i);
     const width = widthMatch ? Number(widthMatch[1]) : 0;
-    const imageKey = filename.replace(/-\d+w(?=\.[^.]+$)/i, "").toLowerCase();
+    const imageKey = filename.replace(/-\d+w(?=\.[^.]+$)/i, "").replace(/\.(?:jpe?g|png|webp)$/i, "").toLowerCase();
     const previous = bestByImage.get(imageKey);
 
     if (!previous || width > previous.width) {
