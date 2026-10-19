@@ -30,7 +30,8 @@ Die erste Fassung wurde anhand der öffentlich sichtbaren Inhalte der bestehende
 ## Vor Veröffentlichung prüfen
 
 - Konzerttermine, Uhrzeiten und Veranstaltungsdetails mit der Band abgleichen.
-- Offizielle Bandfotos und Logo in `public/` ergänzen; derzeit nutzt der Hero eine eigens gestaltete CSS-Bühnenillustration.
+- Eine Galerie mit sechs Originalfotos der bisherigen Website ist eingebunden. Die Bilder werden aktuell direkt vom Original-CDN geladen; vor Veröffentlichung sollten sie für dauerhafte Verfügbarkeit lokal unter `public/assets/` abgelegt werden.
+- Ein eigenes Logo bzw. lokale Bilddateien können später ergänzt werden.
 - Impressum und Datenschutzerklärung ergänzen bzw. juristisch prüfen.
 - Cookie-/Datenschutzanforderungen für eingebettete Medien prüfen. SoundCloud wird derzeit nur extern verlinkt.
 - Mobilgeräte und Tastaturbedienung testen.
