@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url'
 const fromRoot = (path) => fileURLToPath(new URL(path, import.meta.url))
 
 export default defineConfig({
+  // GitHub Pages serves this project from /black-to-blue-website/.
+  base: '/black-to-blue-website/',
   build: {
     rollupOptions: {
       input: {
