@@ -74,6 +74,8 @@ document.querySelectorAll(".video-frame video").forEach((video) => {
       video.classList.add("has-auto-poster");
       video.removeEventListener("seeked", createPoster);
       video.removeEventListener("loadeddata", onLoadedData);
+      // Den Clip wieder an den Anfang setzen, damit Play bei 0 startet.
+      if (video.currentTime > 0.05) video.currentTime = 0;
     } catch (error) {
       // Externe Videodateien ohne passende CORS-Freigabe lassen sich nicht
       // auf ein Canvas zeichnen. Die normale Videowiedergabe bleibt nutzbar.
