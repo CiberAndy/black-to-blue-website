@@ -124,3 +124,12 @@
   .photo-grid{height:clamp(260px,80vw,420px);}
   .booking-photo{height:auto;max-height:70vh;aspect-ratio:auto;}
 }
+
+
+/* Galerie: kompakte Vorschaubilder auf allen Displays */
+.photo-grid{display:grid!important;position:static;height:auto;max-height:none;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:auto;gap:12px}
+.photo-grid .photo,.photo-grid .photo.is-active{display:block;width:100%;height:auto;aspect-ratio:4/3;border:1px solid var(--line);cursor:zoom-in}
+.photo-grid .photo img,.photo-grid .photo.is-active img{width:100%;height:100%;object-fit:cover;object-position:center}
+.gallery-controls{display:none}
+@media(max-width:800px){.photo-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}}
+@media(max-width:520px){.photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
