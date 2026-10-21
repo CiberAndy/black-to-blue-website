@@ -112,3 +112,15 @@
     background-position:center center;
   }
 }
+
+
+/* Fotos vollständig im Original-Seitenverhältnis zeigen, auch auf Smartphones */
+.photo-grid .photo{background:#05070b;}
+.photo-grid .photo img{object-fit:contain;object-position:center;width:100%;height:100%;}
+.band-art{background:#05070b;}
+.band-art img{object-fit:contain;}
+.booking-photo{object-fit:contain;background:#05070b;}
+@media(max-width:640px){
+  .photo-grid{height:clamp(260px,80vw,420px);}
+  .booking-photo{height:auto;max-height:70vh;aspect-ratio:auto;}
+}
