@@ -59,7 +59,7 @@ if (gallery) {
 
 // Stabiles Video-Standbild: Ein eigenes Bild-Overlay verhindert, dass der
 // Browser das Vorschaubild beim Laden/Entladen des Videoframes schwarz übermalt.
-document.querySelectorAll(".video-frame video").forEach((video) => {
+document.querySelectorAll(".video-frame video").forEach((video, videoIndex) => {
   const frame = video.closest(".video-frame");
   if (!frame) return;
 
@@ -126,7 +126,9 @@ document.querySelectorAll(".video-frame video").forEach((video) => {
   const onLoadedData = () => {
     if (posterReady) return;
     const duration = Number.isFinite(video.duration) ? video.duration : 0;
-    const targetTime = duration > 2 ? Math.min(1.5, duration * 0.1) : 0;
+    const targetTime = videoIndex === 2 && duration > 2
+      ? Math.min(60, Math.max(0, duration - 0.5))
+      : duration > 2 ? Math.min(1.5, duration * 0.1) : 0;
     if (Math.abs(video.currentTime - targetTime) < 0.1) {
       createPoster();
       return;
