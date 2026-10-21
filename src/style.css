@@ -133,3 +133,14 @@
 .gallery-controls{display:none}
 @media(max-width:800px){.photo-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}}
 @media(max-width:520px){.photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
+
+
+/* Großansicht der Fotos */
+.photo-dialog{position:fixed;inset:0;max-width:100vw;max-height:100vh;width:100vw;height:100vh;margin:0;padding:60px 70px 24px;border:0;background:rgba(2,4,9,.96);color:white;align-items:center;justify-content:center;gap:18px}
+.photo-dialog[open]{display:flex}
+.photo-dialog::backdrop{background:rgba(2,4,9,.92)}
+.photo-dialog-image{display:block;max-width:calc(100vw - 190px);max-height:calc(100vh - 100px);width:auto;height:auto;object-fit:contain}
+.photo-dialog button{flex-shrink:0;width:44px;height:44px;border:1px solid rgba(255,255,255,.3);background:#101725;color:white;font-size:25px;cursor:pointer}
+.photo-dialog button:hover{background:var(--cyan);color:#08101d}
+.photo-dialog-close{position:absolute;right:18px;top:16px}
+@media(max-width:520px){.photo-dialog{padding:60px 5px 20px;gap:5px}.photo-dialog-image{max-width:calc(100vw - 94px);max-height:calc(100vh - 110px)}.photo-dialog button{width:34px;height:42px}}
