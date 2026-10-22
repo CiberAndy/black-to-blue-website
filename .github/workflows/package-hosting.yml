@@ -23,12 +23,10 @@ jobs:
         run: npm install
       - name: Build for hosting root
         run: npm run build -- --base=/
-      - name: Create ZIP for web hosting
-        run: cd dist && zip -r ../black2blue-hosting.zip .
-      - name: Upload hosting ZIP
+      - name: Upload ready-to-deploy website files
         uses: actions/upload-artifact@v4
         with:
-          name: black2blue-hosting
-          path: black2blue-hosting.zip
+          name: black2blue-webspace
+          path: dist/
           if-no-files-found: error
           retention-days: 14
