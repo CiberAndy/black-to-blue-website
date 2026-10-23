@@ -1,4 +1,4 @@
-name: Package website for external hosting
+name: Build and deploy website to IONOS
 
 on:
   push:
@@ -10,19 +10,23 @@ permissions:
   actions: write
 
 jobs:
-  package:
+  package-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
+
       - name: Install dependencies
         run: npm install
+
       - name: Build for hosting root
         run: npm run build -- --base=/
+
       - name: Upload ready-to-deploy website files
         uses: actions/upload-artifact@v4
         with:
@@ -30,3 +34,15 @@ jobs:
           path: dist/
           if-no-files-found: error
           retention-days: 14
+
+      - name: Deploy website to IONOS via SSH/SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: 22
+          source: "dist/*"
+          target: "/website"
+          strip_components: 1
+          overwrite: true
