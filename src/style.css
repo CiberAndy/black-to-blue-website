@@ -363,3 +363,24 @@
   border-radius:0;
   font-size:0;
 }
+
+
+/* Originale blaue Zwei direkt im black2blue-Schriftzug */
+.wordmark .brand-two{
+  display:inline-flex;
+  width:.72em;
+  height:.9em;
+  align-items:center;
+  justify-content:center;
+  margin:0 .015em;
+  vertical-align:-.04em;
+  background:none;
+  color:inherit;
+  font-size:inherit;
+}
+.wordmark .brand-two img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
