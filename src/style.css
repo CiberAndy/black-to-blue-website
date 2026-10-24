@@ -134,3 +134,13 @@
 
 /* Künstlerbeispiele in den Sound-Karten */
 .sound-artists{display:block;margin-top:12px;color:#c8d7ef;font-size:11px;line-height:1.8;}
+
+
+/* Übergreifender Hinweis auf eigene Songs aus Soul, Blues und Rock */
+.original-music{display:grid;grid-template-columns:54px minmax(0,1fr) auto;align-items:center;gap:22px;margin-top:18px;padding:28px;border:1px solid rgba(157,201,255,.28);background:linear-gradient(105deg,rgba(157,201,255,.09),rgba(242,184,106,.05) 75%,rgba(13,18,28,.75))}
+.original-music-mark{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border:1px solid rgba(242,184,106,.65);border-radius:50%;font-size:24px;color:var(--amber)}
+.original-music .eyebrow{margin-bottom:8px}
+.original-music h3{font:700 30px var(--display);margin:0 0 8px}
+.original-music p:not(.eyebrow){max-width:650px;margin:0;color:var(--muted);font-size:13px;line-height:1.8}
+.original-music-tag{font-size:9px;letter-spacing:1.5px;color:var(--cyan);white-space:nowrap}
+@media(max-width:640px){.original-music{grid-template-columns:42px minmax(0,1fr);gap:14px;padding:20px}.original-music-mark{width:40px;height:40px}.original-music h3{font-size:25px}.original-music-tag{grid-column:2;white-space:normal;line-height:1.6}}
