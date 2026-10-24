@@ -297,3 +297,41 @@
 @media(max-width:640px){
   .hero-actions{gap:8px}
 }
+
+
+/* Einheitlicher Stil für alle drei Hero-Links – inklusive Mouse-over */
+.hero-actions a.button,
+.hero-actions a.text-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:transparent;
+  color:inherit;
+  font:400 12px/1.2 var(--body);
+  padding:0 0 7px;
+  margin:0;
+  border:0;
+  border-bottom:1px solid #53617a;
+  border-radius:0;
+  box-shadow:none;
+  text-decoration:none;
+  transform:none;
+  transition:color .2s,border-color .2s;
+  vertical-align:middle;
+}
+.hero-actions a.button:hover,
+.hero-actions a.text-link:hover,
+.hero-actions a.button:focus-visible,
+.hero-actions a.text-link:focus-visible{
+  background:transparent;
+  color:var(--cyan);
+  border-bottom-color:var(--cyan);
+  transform:none;
+  box-shadow:none;
+}
+@media(max-width:640px){
+  .hero-actions a.button,
+  .hero-actions a.text-link{
+    font-size:clamp(8px,2.8vw,11px);
+  }
+}
