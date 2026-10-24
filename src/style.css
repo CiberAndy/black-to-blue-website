@@ -460,3 +460,24 @@
   min-height:100%;
   object-fit:fill;
 }
+
+
+/* 02A-Galerieüberschrift: black2blue kleingeschrieben und ohne Lücken um die Grafik */
+.section-label .brand-inline{
+  display:inline-flex;
+  align-items:center;
+  gap:0;
+  white-space:nowrap;
+  text-transform:none;
+  letter-spacing:inherit;
+}
+.section-label .brand-inline-img{
+  display:inline-block;
+  flex:0 0 11px;
+  width:11px;
+  height:13px;
+  margin:0;
+  padding:0;
+  object-fit:fill;
+  vertical-align:middle;
+}
