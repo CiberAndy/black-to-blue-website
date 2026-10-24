@@ -243,3 +243,18 @@
     white-space:nowrap;
   }
 }
+
+
+/* Handy-Design: „Nächste Gigs“ wie die beiden anderen Links darstellen */
+@media(max-width:640px){
+  .hero-actions a.button{
+    background:transparent;
+    color:var(--cyan);
+    font-weight:400;
+    border:0;
+    padding:0;
+    border-bottom:1px solid #53617a;
+    border-radius:0;
+    box-shadow:none;
+  }
+}
