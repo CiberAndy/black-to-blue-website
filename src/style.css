@@ -144,3 +144,14 @@
 .original-music p:not(.eyebrow){max-width:650px;margin:0;color:var(--muted);font-size:13px;line-height:1.8}
 .original-music-tag{font-size:9px;letter-spacing:1.5px;color:var(--cyan);white-space:nowrap}
 @media(max-width:640px){.original-music{grid-template-columns:42px minmax(0,1fr);gap:14px;padding:20px}.original-music-mark{width:40px;height:40px}.original-music h3{font-size:25px}.original-music-tag{grid-column:2;white-space:normal;line-height:1.6}}
+
+
+/* Die Band: Hintergrund an die dunkle, atmosphärische Gestaltung der übrigen Seite angleichen */
+.band-section{
+  background:
+    radial-gradient(ellipse at 82% 42%,rgba(35,63,112,.22),transparent 48%),
+    linear-gradient(110deg,#080b12 0%,#0b101a 55%,#080b12 100%);
+}
+.band-art{
+  background:radial-gradient(ellipse at 50% 42%,rgba(37,62,105,.28),transparent 66%),#080b12;
+}
