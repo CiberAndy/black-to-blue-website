@@ -155,3 +155,11 @@
 .band-art{
   background:radial-gradient(ellipse at 50% 42%,rgba(37,62,105,.28),transparent 66%),#080b12;
 }
+
+
+/* Desktop: Hero-Buttons zuverlässig über der folgenden Laufschrift halten */
+@media(min-width:641px){
+  .hero{position:relative;z-index:2;overflow:visible}
+  .hero-copy{position:relative;z-index:3}
+  .ticker{position:relative;z-index:1;margin-top:0}
+}
