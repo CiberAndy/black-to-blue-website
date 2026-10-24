@@ -171,3 +171,17 @@
   .hero-actions{margin-bottom:0}
   .ticker{margin-top:0;padding:16px 0}
 }
+
+
+/* Mobile Feinschliff: Hero endet knapp unter den Buttons */
+@media(max-width:640px){
+  .hero{
+    min-height:0;
+    height:auto;
+    padding-top:58px;
+    padding-bottom:18px;
+  }
+  .hero-copy{padding-top:0}
+  .hero-actions{margin-top:24px;gap:18px;flex-wrap:wrap}
+  .ticker{margin-top:0;padding:13px 0}
+}
