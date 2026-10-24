@@ -211,3 +211,10 @@
   .hero-intro{line-height:1.6}
   .hero-actions{margin-top:22px}
 }
+
+
+/* Hero-Headline: „FEEL THE“ bleibt eine Zeile, auch bei schmalem Desktopfenster */
+.hero-title-line{white-space:nowrap}
+@media(min-width:641px){
+  .hero h1{font-size:clamp(68px,11vw,160px)}
+}
