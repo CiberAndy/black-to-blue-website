@@ -131,3 +131,6 @@
 .soundcloud-player{max-width:520px;margin-top:24px;padding:12px;background:rgba(13,18,28,.82);border:1px solid var(--line)}
 .soundcloud-player iframe{display:block;width:100%;max-width:100%;border:0}
 .soundcloud-fallback{display:inline-block;margin-top:8px;font-size:11px;color:var(--cyan);text-decoration:underline}
+
+/* Künstlerbeispiele in den Sound-Karten */
+.sound-artists{display:block;margin-top:12px;color:#c8d7ef;font-size:11px;line-height:1.8;}
