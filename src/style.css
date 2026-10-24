@@ -258,3 +258,16 @@
     box-shadow:none;
   }
 }
+
+
+/* In allen Designs: „Nächste Gigs“ optisch wie die beiden Textlinks */
+.hero-actions a.button{
+  background:transparent;
+  color:var(--cyan);
+  font-weight:400;
+  border:0;
+  padding:0;
+  border-bottom:1px solid #53617a;
+  border-radius:0;
+  box-shadow:none;
+}
