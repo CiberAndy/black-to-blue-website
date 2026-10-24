@@ -218,3 +218,28 @@
 @media(min-width:641px){
   .hero h1{font-size:clamp(68px,11vw,160px)}
 }
+
+
+/* Handy-Design: Hero-Aktionen linksbündig in einer einzigen Zeile */
+@media(max-width:640px){
+  .hero-actions{
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-start;
+    align-items:center;
+    flex-wrap:nowrap;
+    gap:8px;
+    width:100%;
+  }
+  .hero-actions .button{
+    flex:0 0 auto;
+    padding:10px 9px;
+    font-size:clamp(8px,2.8vw,11px);
+    white-space:nowrap;
+  }
+  .hero-actions .text-link{
+    flex:0 0 auto;
+    font-size:clamp(8px,2.8vw,11px);
+    white-space:nowrap;
+  }
+}
