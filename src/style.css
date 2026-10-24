@@ -335,3 +335,31 @@
     font-size:clamp(8px,2.8vw,11px);
   }
 }
+
+
+/* Das originale black2blue-Erkennungszeichen als wiederkehrender Akzent */
+.wordmark span:first-child{
+  display:inline-block;
+  width:.72em;
+  height:.9em;
+  margin:0 .015em;
+  background:url('/assets/black2blue-2.svg') center/contain no-repeat;
+  color:transparent;
+  font-size:0;
+  vertical-align:-.04em;
+}
+.hero-actions a.button::before{
+  content:"";
+  display:inline-block;
+  width:13px;
+  height:15px;
+  margin-right:6px;
+  background:url('/assets/black2blue-2.svg') center/contain no-repeat;
+  flex:0 0 auto;
+}
+.original-music-mark{
+  background:url('/assets/black2blue-2.svg') center/contain no-repeat;
+  border:0;
+  border-radius:0;
+  font-size:0;
+}
