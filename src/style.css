@@ -13027,3 +13027,24 @@ AgH///79+/r7AP8A/v78+/v7+/sCAgKDAunx+4IT+ere5tzTz9DQ0NXf39zZ
 Ojo6MCosMDU1MCUANYEX8vL4AQULFiEoIgAFAwoMFBwcHBwc9PPyg5IDAQEB
 AYEAAYGCAAGCAf//ggH/AYECAQEBiIgAAYEAAYkAAYObiAABgQABiQABg5s=
 ) format("truetype");font-style:normal;font-weight:100 1000;font-display:swap}
+
+
+/* Mobile-Fix: Hero-Schlagzeile vollständig sichtbar halten */
+@media (max-width: 640px) {
+  .hero-copy {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .hero h1 {
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: clamp(48px, 14vw, 62px);
+    line-height: .9;
+    letter-spacing: -.035em;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+  .hero-title-line {
+    white-space: nowrap;
+  }
+}
