@@ -13111,3 +13111,22 @@ AYEAAYGCAAGCAf//ggH/AYECAQEBiIgAAYEAAYkAAYObiAABgQABiQABg5s=
     font-size: 26px;
   }
 }
+
+
+/* Hauptüberschriften auf Startseite und Unterseiten einheitlich skalieren */
+.hero h1,
+.legal-page h1,
+.video-page h1 {
+  font-size: clamp(64px, 9vw, 112px);
+  line-height: .9;
+  letter-spacing: -.035em;
+}
+@media (max-width: 640px) {
+  .hero h1,
+  .legal-page h1,
+  .video-page h1 {
+    font-size: clamp(48px, 14vw, 62px);
+    line-height: .92;
+    letter-spacing: -.04em;
+  }
+}
